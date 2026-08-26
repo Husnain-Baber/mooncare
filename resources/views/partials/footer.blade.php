@@ -1,0 +1,47 @@
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container-moon">
+    <div class="footer-grid">
+      <div>
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Moon Elderly Care Center" class="footer-logo">
+        <p>Compassionate, professional elderly care delivered with warmth and dignity — at our care centre in Kulim or
+          in the comfort of your own home.</p>
+        <div class="footer-socials">
+          @include('partials.socials')
+        </div>
+      </div>
+
+      <div>
+        <h6>Pages</h6>
+        <ul class="footer-links">
+          <li><a href="{{ route('home') }}"><i class="bi bi-chevron-right"></i>Home</a></li>
+          <li><a href="{{ route('home') }}#services"><i class="bi bi-chevron-right"></i>Services</a></li>
+          <li><a href="{{ route('gallery') }}"><i class="bi bi-chevron-right"></i>Gallery</a></li>
+          <li><a href="{{ route('services.show', 'assisted-living') }}"><i class="bi bi-chevron-right"></i>Assisted Living</a></li>
+          <li><a href="{{ route('services.show', 'home-nursing') }}"><i class="bi bi-chevron-right"></i>Home Nursing</a></li>
+          <li><a href="{{ route('services.show', 'dementia-care') }}"><i class="bi bi-chevron-right"></i>Dementia Care</a></li>
+          <li><a href="{{ route('home') }}#contact"><i class="bi bi-chevron-right"></i>Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h6>Contact information</h6>
+        <ul class="footer-meta" style="list-style:none;padding:0">
+          <li><i class="bi bi-geo-alt-fill"></i><span>{!! config('services-pages.address') !!}</span></li>
+          <li><i class="bi bi-telephone-fill"></i><a href="tel:{{ str_replace(' ', '', config('services-pages.phone')) }}">{{ config('services-pages.phone') }}</a></li>
+          <li><i class="bi bi-envelope-fill"></i><a href="mailto:{{ config('services-pages.email') }}">{{ config('services-pages.email') }}</a></li>
+        </ul>
+        <h6 style="margin-top:1.8rem">Stay updated</h6>
+        <form id="newsletterForm" class="footer-newsletter" novalidate>
+          <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
+          <button type="submit" aria-label="Subscribe"><i class="bi bi-send-fill"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© <span id="year">2026</span> Moon Elderly Care Center. All rights reserved.</div>
+      <div>Designed and Developed by <a href="{{ config('services-pages.credit_url') }}" target="_blank">{{ config('services-pages.credit') }}</a></div>
+    </div>
+  </div>
+</footer>
