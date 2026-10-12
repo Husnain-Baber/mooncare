@@ -8,14 +8,24 @@
     <nav aria-label="Primary">
       <ul class="navbar-menu">
         <li><a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+        
         <li class="dropdown">
           <a href="#" class="nav-link dropdown-toggle {{ request()->routeIs('services.show') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Services <i class="bi bi-chevron-down" style="font-size:.7rem"></i>
-          </a>
+            Services </a>
           <ul class="dropdown-menu moon-dropdown">
             @foreach (config('services-pages.pages') as $svc)
               <li><a class="dropdown-item {{ request()->route('service') === $svc['slug'] ? 'active-item' : '' }}" href="{{ route('services.show', $svc['slug']) }}"><i class="{{ $svc['icon'] }}"></i>{{ $svc['title'] }}</a></li>
             @endforeach
+          </ul>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0);" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Branches 
+            </a>
+            <ul class="dropdown-menu moon-dropdown">
+                <li><a class="dropdown-item" href="{{ route('butterworth') }}" target="_blank" rel="noopener"> Butterworth Pinang</a></li>
+              <li><a class="dropdown-item" href="https://mooncarecenter.com" target="_blank" rel="noopener"> Moon Care Center</a></li>
+              <li><a class="dropdown-item" href="https://mymooncarecenter.com" target="_blank" rel="noopener"> My Moon Care Center</a></li>
+              <li><a class="dropdown-item" href="https://maplecarecenter.com" target="_blank" rel="noopener"> Maple Care Center</a></li>
           </ul>
         </li>
         <li><a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a></li>

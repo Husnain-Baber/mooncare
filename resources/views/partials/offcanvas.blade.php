@@ -6,7 +6,15 @@
   </div>
   <div class="offcanvas-body">
     <ul class="moon-canvas-list">
-      <li><a href="{{ route('home') }}">Home <i class="bi bi-chevron-right"></i></a></li>
+      <!--<li><a href="{{ route('home') }}">Home <i class="bi bi-chevron-right"></i></a></li>-->
+      <li>
+            <a data-bs-toggle="collapse" href="#mobileHome" role="button" aria-expanded="false">Home <i class="bi bi-chevron-down"></i></a>
+            <ul class="collapse moon-canvas-sub" id="mobileHome">
+              <li><a href="https://mooncarecenter.com" target="_blank" rel="noopener"> Moon Care Center</a></li>
+              <li><a href="https://mymooncarecenter.com" target="_blank" rel="noopener"> My Moon Care Center</a></li>
+              <li><a href="https://maplecarecenter.com" target="_blank" rel="noopener"> Maple Care Center</a></li>
+          </ul>
+        </li>
       <li>
         <a data-bs-toggle="collapse" href="#mobileServices" role="button" aria-expanded="false">Services <i class="bi bi-chevron-down"></i></a>
         <ul class="collapse moon-canvas-sub" id="mobileServices">

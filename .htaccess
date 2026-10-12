@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Laravel: serve everything from the public/ folder (URL stays clean)
+    RewriteCond %{REQUEST_URI} !^/public
+    RewriteRule ^(.*)$ /public/$1 [L]
+</IfModule>
+
+# Block direct access to sensitive framework files
+<FilesMatch "^(\.env|\.htaccess|artisan|composer\.json|composer\.lock|\.git)">
+    Require all denied
+</FilesMatch>

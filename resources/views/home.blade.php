@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Moon Elderly Care Center | Compassionate Home Nursing Care in Kulim')
+@section('title', 'Nursing Home Simpang Ampat Penang | Moon Elderly Care Center')
 @section('description', 'Moon Elderly Care Center provides best nursing care service in your area — assisted living, home nursing, dementia care, palliative care and more. Compassionate care at your doorstep.')
+
+@section('page_head')
+  <!-- Leaflet — interactive "Our Location" map (home page only) -->
+  <link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+@endsection
 
 @section('content')
   <!-- ======================= HERO ======================= -->
@@ -16,6 +21,8 @@
       style="width:150px;height:150px;top:55%;left:28%;"></div>
 
     <div class="container-moon hero-inner">
+     <div class="hero-layout">
+      <div class="hero-copy">
       <div class="hero-badge reveal"><span class="dot"></span>Compassionate home nursing care</div>
       <h1 class="reveal" data-delay="100">Bringing <span class="gold">heartfelt care</span> to your doorstep</h1>
       <p class="hero-lead reveal" data-delay="200">At Moon Elderly Care Center, we understand the importance of
@@ -30,6 +37,22 @@
         <div class="hero-stat"><div class="num">10</div><div class="lbl">Specialist services</div></div>
         <div class="hero-stat"><div class="num">95%</div><div class="lbl">Client satisfaction</div></div>
       </div>
+      </div>
+
+      <div class="hero-visual reveal" data-delay="250">
+        <div class="hero-frame">
+          <img src="{{ asset('assets/images/home.jpeg') }}" alt="Caring for our elders at Moon Elderly Care Center" fetchpriority="high">
+        </div>
+        <div class="hero-float hero-float--a">
+          <span class="ico"><i class="bi bi-heart-pulse-fill"></i></span>
+          <div><strong>Compassionate</strong><small>Nursing care</small></div>
+        </div>
+        <div class="hero-float hero-float--b">
+          <span class="ico"><i class="bi bi-clock-history"></i></span>
+          <div><strong>24/7</strong><small>Support at home</small></div>
+        </div>
+      </div>
+     </div>
     </div>
 
     <div class="scroll-cue" aria-hidden="true"></div>
@@ -59,42 +82,44 @@
           professionals who treat every resident like family.</p>
       </div>
 
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-3 reveal" data-tilt>
-          <a href="{{ route('services.show', 'health-care') }}" class="service-card">
-            <div class="service-icon"><i class="bi bi-capsule"></i></div>
-            <h3>Medication management</h3>
-            <p>Expert medication reminders, administration and monitoring to keep every resident safe.</p>
-            <span class="link-arrow">Read more <i class="bi bi-arrow-right"></i></span>
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-3 reveal" data-delay="100" data-tilt>
-          <a href="{{ route('services.show', 'home-nursing') }}" class="service-card">
-            <div class="service-icon"><i class="bi bi-hospital"></i></div>
-            <h3>Skilled nursing care</h3>
-            <p>Expert medical attention delivered by licensed professionals, at home or in care.</p>
-            <span class="link-arrow">Read more <i class="bi bi-arrow-right"></i></span>
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-3 reveal" data-delay="200" data-tilt>
-          <a href="{{ route('services.show', 'professional-service') }}" class="service-card">
-            <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
-            <h3>Chronic disease management</h3>
-            <p>Personalised programmes supporting long-term conditions with consistent, gentle oversight.</p>
-            <span class="link-arrow">Read more <i class="bi bi-arrow-right"></i></span>
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-3 reveal" data-delay="300" data-tilt>
-          <a href="{{ route('services.show', 'post-stroke') }}" class="service-card">
-            <div class="service-icon"><i class="bi bi-bandaid"></i></div>
-            <h3>Rehabilitation support</h3>
-            <p>Helping residents regain independence and rebuild strength after illness or stroke.</p>
-            <span class="link-arrow">Read more <i class="bi bi-arrow-right"></i></span>
-          </a>
-        </div>
+      @php($allServices = config('services-pages.pages'))
+      <div class="svc-grid">
+        @foreach ($allServices as $i => $svc)
+          <div class="svc-item {{ $i >= 6 ? 'svc-extra' : 'reveal' }}" @if($i < 6) data-delay="{{ ($i % 3) * 100 }}" @endif>
+            <a href="{{ route('services.show', $svc['slug']) }}" class="service-card svc-card">
+              <span class="svc-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+              <div class="service-icon"><i class="bi {{ $svc['icon'] }}"></i></div>
+              <h3>{{ $svc['title'] }}</h3>
+              <p>{{ \Illuminate\Support\Str::limit($svc['intro'], 120) }}</p>
+              <span class="link-arrow">Learn more <i class="bi bi-arrow-right"></i></span>
+            </a>
+          </div>
+        @endforeach
       </div>
+
+      @if (count($allServices) > 6)
+        <div class="text-center svc-more reveal">
+          <button type="button" class="btn btn-gold btn-lg" id="svcToggle" aria-expanded="false" aria-controls="services">
+            <span class="lbl">Show all services ({{ count($allServices) }})</span> <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
+      @endif
     </div>
   </section>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('svcToggle');
+      if (!btn) return;
+      var section = document.getElementById('services');
+      btn.addEventListener('click', function () {
+        var open = section.classList.toggle('svc-open');
+        btn.setAttribute('aria-expanded', open);
+        btn.querySelector('.lbl').textContent = open ? 'Show fewer services' : 'Show all services ({{ count($allServices) }})';
+        if (!open) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    })();
+  </script>
 
   <!-- ======================= WHY CHOOSE US ======================= -->
   <section class="section section-dark">
@@ -270,8 +295,8 @@
           <span class="gi-zoom"><i class="bi bi-zoom-in"></i></span>
           <span class="gi-cap">A home away from home</span>
         </a>
-        <a class="gallery-item reveal" data-delay="320" href="{{ asset('assets/images/gallery/44.jpg') }}" data-full="{{ asset('assets/images/gallery/44.jpg') }}" data-caption="Caring hands, every hour">
-          <img src="{{ asset('assets/images/gallery/44.jpg') }}" alt="Caring hands, every hour" loading="lazy">
+        <a class="gallery-item reveal" data-delay="320" href="{{ asset('assets/images/gallery/21.jpg') }}" data-full="{{ asset('assets/images/gallery/21.jpg') }}" data-caption="Caring hands, every hour">
+          <img src="{{ asset('assets/images/gallery/21.jpg') }}" alt="Caring hands, every hour" loading="lazy">
           <span class="gi-zoom"><i class="bi bi-zoom-in"></i></span>
           <span class="gi-cap">Caring hands</span>
         </a>
@@ -295,23 +320,24 @@
 
     <div class="team-marquee marquee reveal">
       <div class="team-track">
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659973e19f852d4eb7b9e44_nurse-01.jpg" alt="Emma Johnson" loading="lazy"></div><div class="meta"><h4>Emma Johnson, RN</h4><div class="role">Senior Nurse</div></div></div>
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/665999174af78aecbfbc51bd_nurse-02.jpg" alt="David Miller" loading="lazy"></div><div class="meta"><h4>David Miller, LPN</h4><div class="role">Care Coordinator</div></div></div>
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659999e33af36db7d5d015f_nurse-03.jpg" alt="Olivia Martinez" loading="lazy"></div><div class="meta"><h4>Olivia Martinez, RN</h4><div class="role">Palliative Care</div></div></div>
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a20265112b7fc0134b2_nurse-04.jpg" alt="Sophia Brown" loading="lazy"></div><div class="meta"><h4>Sophia Brown, CNA</h4><div class="role">Nursing Assistant</div></div></div>
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a641ced480e2c3d30a6_nurse-05.jpg" alt="Michael Wilson" loading="lazy"></div><div class="meta"><h4>Michael Wilson, RN</h4><div class="role">Nursing Specialist</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659973e19f852d4eb7b9e44_nurse-01.jpg" alt="Nurin" loading="lazy"></div><div class="meta"><h4>Nurin, RN</h4><div class="role">Senior Nurse</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/665999174af78aecbfbc51bd_nurse-02.jpg" alt="Terengganu" loading="lazy"></div><div class="meta"><h4>Terengganu, LPN</h4><div class="role">Care Coordinator</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659999e33af36db7d5d015f_nurse-03.jpg" alt="Kelantan" loading="lazy"></div><div class="meta"><h4>Kelantan, RN</h4><div class="role">Palliative Care</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a20265112b7fc0134b2_nurse-04.jpg" alt="Pahang" loading="lazy"></div><div class="meta"><h4>Pahang, CNA</h4><div class="role">Nursing Assistant</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a641ced480e2c3d30a6_nurse-05.jpg" alt="Adriana" loading="lazy"></div><div class="meta"><h4>Adriana, RN</h4><div class="role">Nursing Specialist</div></div></div>
         <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b04ab292f147aacce18_nurse-06.jpg" alt="Judy Nguyen" loading="lazy"></div><div class="meta"><h4>Judy Nguyen, ER</h4><div class="role">Emergency Room</div></div></div>
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b624ef59bb086d09c56_nurse-07.jpg" alt="Billy Vasquez" loading="lazy"></div><div class="meta"><h4>Billy Vasquez, NP</h4><div class="role">Nurse Practitioner</div></div></div>
-        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b9465463c6f55660e3d_nurse-08.jpg" alt="Amanda Reed" loading="lazy"></div><div class="meta"><h4>Amanda Reed, RN</h4><div class="role">Registered Nurse</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b624ef59bb086d09c56_nurse-07.jpg" alt="Batrisyia" loading="lazy"></div><div class="meta"><h4>Batrisyia, NP</h4><div class="role">Nurse Practitioner</div></div></div>
+        <div class="nurse-card"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b9465463c6f55660e3d_nurse-08.jpg" alt="Nurul Ain" loading="lazy"></div><div class="meta"><h4>Nurul Ain, RN</h4><div class="role">Registered Nurse</div></div></div>
         <!-- duplicate for seamless loop -->
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659973e19f852d4eb7b9e44_nurse-01.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Emma Johnson, RN</h4><div class="role">Senior Nurse</div></div></div>
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/665999174af78aecbfbc51bd_nurse-02.jpg" alt="" loading="lazy"></div><div class="meta"><h4>David Miller, LPN</h4><div class="role">Care Coordinator</div></div></div>
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659999e33af36db7d5d015f_nurse-03.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Olivia Martinez, RN</h4><div class="role">Palliative Care</div></div></div>
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a20265112b7fc0134b2_nurse-04.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Sophia Brown, CNA</h4><div class="role">Nursing Assistant</div></div></div>
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a641ced480e2c3d30a6_nurse-05.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Michael Wilson, RN</h4><div class="role">Nursing Specialist</div></div></div>
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659973e19f852d4eb7b9e44_nurse-01.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Nurin, RN</h4><div class="role">Senior Nurse</div></div></div>
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/665999174af78aecbfbc51bd_nurse-02.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Terengganu, LPN</h4><div class="role">Care Coordinator</div></div></div>
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/6659999e33af36db7d5d015f_nurse-03.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Kelantan, RN</h4><div class="role">Palliative Care</div></div></div>
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a20265112b7fc0134b2_nurse-04.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Pahang, CNA</h4><div class="role">Nursing Assistant</div></div></div>
+        
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599a641ced480e2c3d30a6_nurse-05.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Adriana, RN</h4><div class="role">Nursing Specialist</div></div></div>
         <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b04ab292f147aacce18_nurse-06.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Judy Nguyen, ER</h4><div class="role">Emergency Room</div></div></div>
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b624ef59bb086d09c56_nurse-07.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Billy Vasquez, NP</h4><div class="role">Nurse Practitioner</div></div></div>
-        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b9465463c6f55660e3d_nurse-08.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Amanda Reed, RN</h4><div class="role">Registered Nurse</div></div></div>
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b624ef59bb086d09c56_nurse-07.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Batrisyia, NP</h4><div class="role">Nurse Practitioner</div></div></div>
+        <div class="nurse-card" aria-hidden="true"><div class="photo"><img src="https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa6b/66599b9465463c6f55660e3d_nurse-08.jpg" alt="" loading="lazy"></div><div class="meta"><h4>Nurul Ain, RN</h4><div class="role">Registered Nurse</div></div></div>
       </div>
     </div>
   </section>
@@ -489,5 +515,238 @@
     </div>
   </section>
 
+  <!-- ======================= OUR LOCATIONS ======================= -->
+  @php($branches = config('services-pages.locations'))
+  @php($branchesPhone = config('services-pages.phone'))
+  <section class="section section-dark section-locations" id="location" aria-labelledby="locationHeading">
+    <div class="container-moon">
+      <div class="section-head text-center reveal">
+        <span class="eyebrow center">Where to find us</span>
+        <h2 id="locationHeading" class="text-cream">Our <span class="text-red">locations</span></h2>
+        <p class="mx-auto" style="max-width:62ch;color:var(--moon-lavender)">We now welcome residents across
+          <strong class="text-cream">Kedah &amp; Penang</strong> — pick the centre closest to you and drop by for a
+          tour, or call ahead and our team will meet you at the door.</p>
+      </div>
+
+      <div class="location-shell reveal" data-dir="zoom">
+        <!-- Branch rail -->
+        <aside class="location-rail" aria-label="List of Moon Elderly Care Center branches">
+          <div class="rail-head">
+            <span class="rail-pulse" aria-hidden="true"></span>
+            <span>{{ count($branches) }} care centres · open 24 / 7</span>
+          </div>
+
+          <div class="loc-list">
+            @foreach ($branches as $i => $branch)
+              <button type="button" class="loc-card {{ $loop->first ? 'is-active' : '' }}" data-loc="{{ $loop->index }}"
+                aria-pressed="{{ $loop->first ? 'true' : 'false' }}">
+                <span class="loc-num" aria-hidden="true">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                <span class="loc-body">
+                  <span class="loc-title">
+                    <strong>{{ $branch['name'] }}</strong>
+                    <em>{{ $branch['tag'] }}</em>
+                  </span>
+                  <span class="loc-area">{{ $branch['area'] }}</span>
+                  <span class="loc-addr">{{ $branch['address'] }}</span>
+                </span>
+                <span class="loc-go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+              </button>
+            @endforeach
+          </div>
+
+          <div class="rail-foot">
+            <span class="rail-foot-icon"><i class="bi bi-telephone-fill"></i></span>
+            <span>Prefer to talk to a person?<br>
+              <a href="tel:{{ str_replace(' ', '', $branchesPhone) }}">{{ $branchesPhone }}</a></span>
+          </div>
+        </aside>
+
+        <!-- Map -->
+        <div class="location-mapwrap">
+          <div id="locationMap" class="location-map" role="application"
+            aria-label="Interactive map showing Moon Elderly Care Center branches in Kedah and Penang"></div>
+
+          <div class="map-card" aria-live="polite">
+            <span class="map-card-badge" id="mcBadge">{{ $branches[0]['tag'] }}</span>
+            <h3 class="map-card-name" id="mcName">{{ $branches[0]['name'] }}</h3>
+            <p class="map-card-addr" id="mcAddr">{{ $branches[0]['address'] }}</p>
+            <div class="map-card-actions">
+              <a class="btn btn-gold p-1" id="mcDir" target="_blank" rel="noopener"
+                href="https://www.google.com/maps/dir/?api=1&destination={{ urlencode($branches[0]['address']) }}">
+                <i class="bi bi-sign-turn-right-fill"></i> Get directions</a>
+              <a class="btn btn-outline p-1" id="mcTel"
+                href="tel:{{ str_replace(' ', '', $branchesPhone) }}"><i class="bi bi-telephone-fill"></i> Call us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   @include('partials.lightbox')
+
+  @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.querySelectorAll('.loc-card').forEach(button => {
+    button.addEventListener('click', function () {
+        document.getElementById('locationMap').scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+        });
+    });
+});
+      (function () {
+        'use strict';
+
+        var wrap = document.getElementById('locationMap');
+        var cards = document.querySelectorAll('.loc-card');
+        var phone = @json($branchesPhone);
+        var locs = @json($branches);
+
+        if (!wrap || typeof L === 'undefined' || !cards.length || !locs.length) return;
+
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var telHref = 'tel:' + String(phone).replace(/[^+\d]/g, '');
+        var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+        var dirUrl = function (addr) {
+          return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(addr);
+        };
+
+        var map = L.map(wrap, {
+          scrollWheelZoom: false,
+          zoomControl: true,
+          attributionControl: true
+        });
+
+        // Keyless OpenStreetMap tiles (CARTO's public basemaps now require an
+        // API key and watermark the map with "API key required" when it is absent).
+        // The light tiles are flipped dark by CSS so the section keeps its night look.
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Live summary card (bottom-left overlay)
+        var mcBadge = document.getElementById('mcBadge');
+        var mcName = document.getElementById('mcName');
+        var mcAddr = document.getElementById('mcAddr');
+        var mcDir = document.getElementById('mcDir');
+        var mcTel = document.getElementById('mcTel');
+
+        var markers = [];
+        var latlngs = [];
+
+        locs.forEach(function (loc, i) {
+          var ll = [loc.lat, loc.lng];
+          latlngs.push(ll);
+
+          var icon = L.divIcon({
+            className: 'loc-marker',
+            html: '<span class="loc-pin"><span class="pin-num">' + pad(i + 1) + '</span></span><span class="pin-ping" aria-hidden="true"></span>',
+            iconSize: [46, 58],
+            iconAnchor: [23, 56],
+            popupAnchor: [0, -50]
+          });
+
+          var marker = L.marker(ll, { icon: icon, title: loc.name, riseOnHover: true }).addTo(map);
+
+          // Popup built with DOM nodes so addresses stay safe text.
+          var box = document.createElement('div');
+          box.className = 'loc-pop';
+          var tag = document.createElement('span');
+          tag.className = 'loc-pop-tag';
+          tag.textContent = loc.tag;
+          var title = document.createElement('h4');
+          title.textContent = loc.name;
+          var addr = document.createElement('p');
+          addr.textContent = loc.address;
+          var go = document.createElement('a');
+          go.className = 'loc-pop-dir';
+          go.href = dirUrl(loc.address);
+          go.target = '_blank';
+          go.rel = 'noopener';
+          go.innerHTML = 'Get directions <i class="bi bi-arrow-up-right"></i>';
+          box.appendChild(tag);
+          box.appendChild(title);
+          box.appendChild(addr);
+          box.appendChild(go);
+
+          marker.bindPopup(box, { maxWidth: 240, minWidth: 210, className: 'loc-popup' });
+          marker.on('click', function () { setActive(i, false); });
+          markers.push(marker);
+        });
+
+        var bounds = L.latLngBounds(latlngs);
+        map.fitBounds(bounds, { padding: [30, 30], maxZoom: 11 });
+
+        function decorate(i, active, hot) {
+          var el = markers[i] && markers[i].getElement && markers[i].getElement();
+          if (!el) return;
+          el.classList.toggle('is-active', active);
+          el.classList.toggle('is-hot', hot);
+        }
+
+        function setActive(i, fly) {
+          cards.forEach(function (c, j) {
+            var on = j === i;
+            c.classList.toggle('is-active', on);
+            c.setAttribute('aria-pressed', on ? 'true' : 'false');
+            decorate(j, on, false);
+          });
+
+          mcBadge.textContent = locs[i].tag;
+          mcName.textContent = locs[i].name;
+          mcAddr.textContent = locs[i].address;
+          mcDir.href = dirUrl(locs[i].address);
+          mcTel.href = telHref;
+
+          if (fly && markers[i]) {
+            if (reduce) {
+              map.setView(markers[i].getLatLng(), Math.max(map.getZoom(), 12));
+            } else {
+              map.flyTo(markers[i].getLatLng(), Math.max(map.getZoom(), 12), { duration: 1.1 });
+            }
+            setTimeout(function () { markers[i].openPopup(); }, reduce ? 0 : 600);
+          }
+        }
+
+        cards.forEach(function (card, i) {
+          card.addEventListener('click', function () { setActive(i, true); });
+          card.addEventListener('mouseenter', function () {
+            if (!card.classList.contains('is-active')) decorate(i, false, true);
+          });
+          card.addEventListener('mouseleave', function () { decorate(i, false, false); });
+        });
+
+        // Keep the rail card and summary in sync when a marker is opened directly.
+        map.on('popupopen', function (e) {
+          markers.forEach(function (m, j) {
+            if (m.getPopup() === e.popup) setActive(j, false);
+          });
+        });
+
+        // Open the first branch once the initial view is settled.
+        setTimeout(function () { markers[0].openPopup(); }, 650);
+
+        // Re-measure whenever the map wrapper scrolls into view (it starts hidden
+        // inside the reveal animation) and on window resize.
+        function refresh() {
+          if (map) { map.invalidateSize(); }
+        }
+        var t = null;
+        window.addEventListener('resize', function () {
+          clearTimeout(t); t = setTimeout(refresh, 200);
+        });
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) { refresh(); io.disconnect(); }
+            });
+          }, { threshold: 0.05 });
+          io.observe(wrap);
+        }
+      })();
+    </script>
+  @endpush
 @endsection

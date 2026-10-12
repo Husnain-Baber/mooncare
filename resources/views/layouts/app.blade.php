@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title', config('services-pages.brand'))</title>
-  <meta name="description" content="@yield('description', 'Moon Elderly Care Center provides best nursing care service in your area — assisted living, home nursing, dementia care, palliative care and more. Compassionate care at your doorstep.')">
-
+  <!--<title>Nursing Home Simpang Ampat Penang | Moon Elderly Care Center</title>-->
+  <meta name="description" content="@yield('description', 'Moon Elderly Care Center provides professional nursing care service in Simpang Ampat Penang — assisted living, home nursing, dementia care, palliative care and more. Compassionate care at your doorstep.')">
+<meta name="google-site-verification" content="gt33TgkoFYac7-XCoG2PtfKcduzp_8Emlz83SguwWyo" />
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.png') }}">
 
   <!-- Bootstrap 5 -->
@@ -20,8 +21,9 @@
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <!-- Theme -->
-  <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/theme.css?v=9') }}" rel="stylesheet">
 
+  @yield('page_head')
   @stack('head')
 </head>
 
@@ -33,7 +35,7 @@
 
   @yield('content')
 
-  @include('partials.footer')
+  @include('partials.footer-selector')
 
   <!-- Back to top -->
   <button class="back-top" id="backTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
