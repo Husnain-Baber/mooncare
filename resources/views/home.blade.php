@@ -87,11 +87,16 @@
         @foreach ($allServices as $i => $svc)
           <div class="svc-item {{ $i >= 6 ? 'svc-extra' : 'reveal' }}" @if($i < 6) data-delay="{{ ($i % 3) * 100 }}" @endif>
             <a href="{{ route('services.show', $svc['slug']) }}" class="service-card svc-card">
-              <span class="svc-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-              <div class="service-icon"><i class="bi {{ $svc['icon'] }}"></i></div>
+              <div class="svc-media">
+                <img src="{{ asset($svc['image']) }}" alt="{{ $svc['title'] }} at Moon Elderly Care Center" loading="lazy">
+                <span class="svc-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="service-icon"><i class="bi {{ $svc['icon'] }}"></i></div>
+              </div>
+              <div class="svc-body">
               <h3>{{ $svc['title'] }}</h3>
               <p>{{ \Illuminate\Support\Str::limit($svc['intro'], 120) }}</p>
               <span class="link-arrow">Learn more <i class="bi bi-arrow-right"></i></span>
+              </div>
             </a>
           </div>
         @endforeach
