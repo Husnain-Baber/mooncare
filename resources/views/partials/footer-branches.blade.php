@@ -6,11 +6,7 @@
         <img src="{{ asset('assets/images/logo.png') }}" alt="Moon Elderly Care Center" class="footer-logo">
         <p>Compassionate, professional elderly care delivered with warmth and dignity — at our care centre in Kulim or
           in the comfort of your own home.</p>
-          <h6 style="margin-top:1.8rem">Stay updated</h6>
-        <form id="newsletterForm" class="footer-newsletter" novalidate>
-          <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
-          <button type="submit" aria-label="Subscribe"><i class="bi bi-send-fill"></i></button>
-        </form>
+         
         <div class="footer-socials">
           @include('partials.socials')
         </div>

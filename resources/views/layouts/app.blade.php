@@ -21,7 +21,7 @@
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <!-- Theme -->
-  <link href="{{ asset('assets/css/theme.css?v=9') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/theme.css?v=10') }}" rel="stylesheet">
 
   @yield('page_head')
   @stack('head')

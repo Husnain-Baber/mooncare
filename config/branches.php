@@ -68,18 +68,51 @@ return [
         ],
     ],
 
-    // Webflow-hosted image used on every service-page hero.
-    'hero_image' => 'https://cdn.prod.website-files.com/664dc2c72953cea4ef68aa48/6651cd6e32cdfbefd8a16864_service-01.jpg',
-
-    // The 10 service pages. Order here drives the navbar dropdown order.
+    // Branch pages. Each entry drives one /<slug> page (see BranchController).
+    //
+    // NOTE: 'address' and 'map_query' for Butterworth are placeholders at town
+    // level — replace them with the branch's full street address and the map,
+    // directions link and contact section update automatically.
     'butterworth' => [
         [
             'slug' => 'butterworth',
             'title' => 'Butterworth Pinang',
-            'meta' => 'At Butterworth Pinang — residential care that treats every resident as an individual, preserving dignity and independence.',
+            'heading' => 'Nursing Home Butterworth',
+            'tagline' => 'Compassionate & Professional Senior Care',
+            'meta' => 'Nursing home in Butterworth, Pulau Pinang — Moon Elderly Care Center offers assisted living, dementia care, palliative care, respite care, home nursing and more, 24 hours a day.',
             'icon' => 'bi-house-heart-fill',
-            'intro' => 'At Butterworth Pinang, the residential care we provide is what you might expect in an ordinary care home for older people — but we go further. Our Assisted Living services are all about treating each and every resident as an individual. By understanding our residents’ needs, preserving dignity and respecting independence, we help to create a real sense of home.',
+            'intro' => 'At Moon Elderly Care Center Butterworth, we go beyond ordinary residential care. Every resident is treated as an individual — we understand their needs, preserve their dignity and respect their independence, so the centre feels like a real second home.',
+            'address' => 'Butterworth, 13000 Pulau Pinang',
+            'map_query' => 'Butterworth, Pulau Pinang, Malaysia',
+            'hero_image' => 'assets/images/malacca/1.jpg',
+            'about_image' => 'assets/images/malacca/23.jpg',
+            'highlights' => [
+                'Registered nurses & trained caregivers on site 24/7',
+                'Personalised care plans for every resident',
+                'Safe, clean and home-like environment',
+                'Flexible day, respite and long-stay options',
+            ],
+            'why' => [
+                ['icon' => 'bi-person-badge-fill', 'title' => 'Qualified & caring staff', 'desc' => 'Trained nurses and caregivers who treat every resident like family.'],
+                ['icon' => 'bi-activity', 'title' => 'Rehabilitation & therapy', 'desc' => 'Gentle, guided exercise to help residents regain strength and independence.'],
+                ['icon' => 'bi-puzzle-fill', 'title' => 'Dementia & specialised care', 'desc' => 'Patient, individualised support for memory loss and complex medical needs.'],
+                ['icon' => 'bi-heart-pulse-fill', 'title' => 'Daily health monitoring', 'desc' => 'Medication, vitals and wellbeing checked consistently, day and night.'],
+                ['icon' => 'bi-flower2', 'title' => 'Holistic wellbeing', 'desc' => 'Nutritious meals, companionship and activities that nurture body and mind.'],
+            ],
+            'gallery' => [
+                ['malacca/1.jpg', 'Our Butterworth centre'],
+                ['malacca/19.jpg', 'Welcoming entrance'],
+                ['malacca/23.jpg', 'Comfortable lounge'],
+                ['malacca/34.jpg', 'Bright living area'],
+                ['malacca/25.jpg', 'Care-ready rooms'],
+                ['malacca/32.jpg', 'Exercise & therapy corner'],
+                ['malacca/39.jpg', 'Warm, cosy seating'],
+                ['malacca/43.jpg', 'Spacious resident ward'],
+                ['malacca/22.jpg', 'Nursing station'],
+                ['malacca/57.jpg', 'Private rooms'],
+                ['malacca/15.jpg', 'Gardens & grounds'],
+                ['malacca/88.jpg', 'Family lounge'],
+            ],
         ],
-        
     ],
 ];
