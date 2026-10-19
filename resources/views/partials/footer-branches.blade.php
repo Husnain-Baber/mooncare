@@ -31,7 +31,7 @@
               <p class="center-name text-white mb-0">Address</p></li>
           <li>
               <i class="bi bi-geo-alt-fill"></i>
-              <span>{!! config('services-pages.address') !!}</span></li>
+              <span>{!! config('branches.butterworth.0.address') !!}</span></li>
         </ul>
       </div>
     </div>

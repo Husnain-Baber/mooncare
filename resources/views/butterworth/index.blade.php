@@ -267,7 +267,7 @@
 
       <div class="branch-map reveal" data-dir="zoom">
         <iframe title="Map of Moon Elderly Care Center {{ $page['title'] }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q={{ $mapQuery }}&output=embed"></iframe>
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.85117102033!2d100.37954409999999!3d5.43956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304ac50fd416019f%3A0x7040686a6c3ec847!2sMoon%20Elderly%20Care%20Center%20Nursing%20Home%20Butherworth%20Penang!5e0!3m2!1sen!2s!4v1792437338872!5m2!1sen!2s"></iframe>
         <div class="map-card">
           <span class="map-card-badge">Branch</span>
           <h3 class="map-card-name">Moon Elderly Care Center — {{ $page['title'] }}</h3>

@@ -82,7 +82,7 @@ return [
             'meta' => 'Nursing home in Butterworth, Pulau Pinang — Moon Elderly Care Center offers assisted living, dementia care, palliative care, respite care, home nursing and more, 24 hours a day.',
             'icon' => 'bi-house-heart-fill',
             'intro' => 'At Moon Elderly Care Center Butterworth, we go beyond ordinary residential care. Every resident is treated as an individual — we understand their needs, preserve their dignity and respect their independence, so the centre feels like a real second home.',
-            'address' => 'Butterworth, 13000 Pulau Pinang',
+            'address' => '27, Jalan Intan, Taman Intan, 13000 Butterworth, Pulau Pinang, Malaysia',
             'map_query' => 'Butterworth, Pulau Pinang, Malaysia',
             'hero_image' => 'assets/images/malacca/1.jpg',
             'about_image' => 'assets/images/malacca/23.jpg',
