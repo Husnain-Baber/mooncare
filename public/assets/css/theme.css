@@ -2048,3 +2048,88 @@ a.contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg)
   .gallery-grid--branch { gap: .7rem; }
   .gallery-grid--branch .gallery-item:nth-child(7n+1) { grid-column: span 2; grid-row: auto; aspect-ratio: 3 / 2; }
 }
+
+/* --------------------------------------------------------------------------
+   What makes us different / Core Care Services Grid
+   -------------------------------------------------------------------------- */
+.choose-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.choose-feature-card {
+  height: 100%;
+  padding: 2.25rem 1.6rem;
+  border-radius: var(--r-md);
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 32px rgba(3, 8, 26, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.choose-feature-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(240, 179, 92, 0.7);
+  box-shadow: 0 22px 50px rgba(3, 8, 26, 0.45);
+}
+
+.choose-feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.35rem;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.choose-feature-card:hover .choose-feature-icon {
+  transform: scale(1.12);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.45);
+}
+
+.choose-feature-card h3 {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--moon-navy);
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  line-height: 1.35;
+}
+
+.choose-feature-card p {
+  font-size: 0.94rem;
+  color: var(--moon-body);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1199.98px) {
+  .choose-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .choose-services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+  .choose-feature-card {
+    padding: 2rem 1.4rem;
+  }
+}
+

@@ -271,6 +271,80 @@
     </div>
   </section>
 
+  <!-- ======================= WHAT MAKES US DIFFERENT / SERVICES ======================= -->
+  <section class="section section-dark" id="what-makes-us-different">
+    <div class="container-moon">
+      <div class="section-head text-center reveal">
+        <span class="eyebrow center">Why choose us</span>
+        <h2 class="text-cream">What makes us <span class="text-red">different</span></h2>
+        <p class="mx-auto" style="max-width:62ch; color:var(--moon-lavender)">
+          Dedicated to delivering professional medical care, specialized support, and a comforting home-like environment for every resident.
+        </p>
+      </div>
+
+      <?php
+        $whyChooseServices = [
+          [
+            'title' => 'Comprehensive Care Services',
+            'desc' => 'Offering a wide range of elder care, medical support, and specialized services.',
+            'icon' => 'bi-shield-plus',
+          ],
+          [
+            'title' => 'Experienced Professionals',
+            'desc' => 'Our skilled staff ensures top-quality care and personalized attention.',
+            'icon' => 'bi-person-badge-fill',
+          ],
+          [
+            'title' => 'Modern Facilities',
+            'desc' => 'Equipped with state-of-the-art infrastructure for a safe and comfortable environment.',
+            'icon' => 'bi-hospital-fill',
+          ],
+          [
+            'title' => '24/7 Support',
+            'desc' => 'Round-the-clock assistance and emergency care for complete peace of mind.',
+            'icon' => 'bi-clock-history',
+          ],
+          [
+            'title' => 'Specialized Medical Care',
+            'desc' => 'Expertise in handling complex medical needs like tracheostomy and stroke recovery.',
+            'icon' => 'bi-heart-pulse-fill',
+          ],
+          [
+            'title' => 'Tailored Care Plans',
+            'desc' => 'Customizable solutions based on individual health, lifestyle, and preferences.',
+            'icon' => 'bi-clipboard2-pulse-fill',
+          ],
+          [
+            'title' => 'Home-Like Environment',
+            'desc' => 'Creating a warm, welcoming space that feels just like home.',
+            'icon' => 'bi-house-heart-fill',
+          ],
+          [
+            'title' => 'Affordable Pricing',
+            'desc' => 'High-quality care at competitive prices to fit diverse budgets.',
+            'icon' => 'bi-wallet2',
+          ],
+        ];
+      ?>
+
+      <div class="choose-services-grid">
+        @foreach ($whyChooseServices as $idx => $item)
+          <div class="choose-feature-card reveal" data-delay="{{ ($idx % 4) * 100 }}">
+            <div class="choose-feature-icon" aria-hidden="true">
+              <i class="bi {{ $item['icon'] }}"></i>
+            </div>
+            <h3>{{ $item['title'] }}</h3>
+            <p>{{ $item['desc'] }}</p>
+          </div>
+        @endforeach
+      </div>
+
+      <div class="text-center mt-5 reveal">
+        <a href="{{ route('home') }}#contact" class="btn btn-gold btn-lg">Book a consultation <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ======================= GALLERY ======================= -->
   <section class="section" id="gallery">
     <div class="container-moon">

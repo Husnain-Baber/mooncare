@@ -77,7 +77,7 @@ return [
         [
             'slug' => 'butterworth',
             'title' => 'Butterworth Pinang',
-            'heading' => 'Nursing Home Butterworth',
+            'heading' => 'Nursing Home Butterworth Pinang',
             'tagline' => 'Compassionate & Professional Senior Care',
             'meta' => 'Nursing home in Butterworth, Pulau Pinang — Moon Elderly Care Center offers assisted living, dementia care, palliative care, respite care, home nursing and more, 24 hours a day.',
             'icon' => 'bi-house-heart-fill',
