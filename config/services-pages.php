@@ -13,7 +13,7 @@ return [
     'phone' => '+60 16 440 9013',
     'email' => 'moonelderlycarecenter@gmail.com',
     'address' => 'No. 9, Lorong Tanjung Permai 3 Villa Tanjung Permai 14100, Simpang Ampat Penang',
-    'credit' => 'HB Tech',
+    'credit' => 'HBTech',
     'credit_url' => 'https://hbtech.digital',
 
     // Care centres shown in the "Our Location" section on the home page.

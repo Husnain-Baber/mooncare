@@ -354,18 +354,18 @@
         <p class="mx-auto" style="max-width:60ch">Real smiles, gentle moments and everyday warmth — take a peek inside our care centre in Kulim.</p>
       </div>
       <div class="gallery-grid gallery-grid--home">
-        <a class="gallery-item reveal" href="{{ asset('assets/images/gallery/38.jpg') }}" data-full="{{ asset('assets/images/gallery/38.jpg') }}" data-caption="Warm moments at Moon Elderly Care Center">
-          <img src="{{ asset('assets/images/gallery/38.jpg') }}" alt="Warm moments at Moon Elderly Care Center" loading="lazy">
+        <a class="gallery-item reveal" href="{{ asset('assets/images/gallery/43.webp') }}" data-full="{{ asset('assets/images/gallery/43.webp') }}" data-caption="Warm moments at Moon Elderly Care Center">
+          <img src="{{ asset('assets/images/gallery/43.webp') }}" alt="Warm moments at Moon Elderly Care Center" loading="lazy">
           <span class="gi-zoom"><i class="bi bi-zoom-in"></i></span>
           <span class="gi-cap">Life at Moon Care</span>
         </a>
-        <a class="gallery-item reveal" data-delay="80" href="{{ asset('assets/images/gallery/25.jpg') }}" data-full="{{ asset('assets/images/gallery/25.jpg') }}" data-caption="Comfort and calm, all day">
-          <img src="{{ asset('assets/images/gallery/25.jpg') }}" alt="Comfort and calm, all day" loading="lazy">
+        <a class="gallery-item reveal" data-delay="80" href="{{ asset('assets/images/gallery/46.webp') }}" data-full="{{ asset('assets/images/gallery/46.webp') }}" data-caption="Comfort and calm, all day">
+          <img src="{{ asset('assets/images/gallery/46.webp') }}" alt="Comfort and calm, all day" loading="lazy">
           <span class="gi-zoom"><i class="bi bi-zoom-in"></i></span>
           <span class="gi-cap">Comfort &amp; calm</span>
         </a>
-        <a class="gallery-item reveal" data-delay="160" href="{{ asset('assets/images/gallery/20.jpg') }}" data-full="{{ asset('assets/images/gallery/20.jpg') }}" data-caption="Everyday joy at our centre">
-          <img src="{{ asset('assets/images/gallery/20.jpg') }}" alt="Everyday joy at our centre" loading="lazy">
+        <a class="gallery-item reveal" data-delay="160" href="{{ asset('assets/images/gallery/47.webp') }}" data-full="{{ asset('assets/images/gallery/47.webp') }}" data-caption="Everyday joy at our centre">
+          <img src="{{ asset('assets/images/gallery/47.webp') }}" alt="Everyday joy at our centre" loading="lazy">
           <span class="gi-zoom"><i class="bi bi-zoom-in"></i></span>
           <span class="gi-cap">Everyday joy</span>
         </a>
